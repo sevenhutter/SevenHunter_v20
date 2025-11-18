@@ -1,36 +1,15 @@
 steps:
-  # 1) Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
-        'build',
-        '-t',
-        'asia-northeast3-docker.pkg.dev/strategic-ivy-478509-u6/sevenhunter-repo/sevenhunter-engine:latest',
-        '.'
-      ]
-
-  # 2) Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      [
-        'push',
-        'asia-northeast3-docker.pkg.dev/strategic-ivy-478509-u6/sevenhunter-repo/sevenhunter-engine:latest'
-      ]
-
-  # 3) Cloud Run Job 업데이트
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
       [
-        'run',
-        'jobs',
-        'update',
-        'sevenhunter-job',
-        '--image=asia-northeast3-docker.pkg.dev/strategic-ivy-478509-u6/sevenhunter-repo/sevenhunter-engine:latest',
-        '--region=asia-northeast3'
+        "run",
+        "jobs",
+        "update",
+        "sevenhunter-job",
+        "--source=.",
+        "--region=us-central1"
       ]
 
-images:
-  - 'asia-northeast3-docker.pkg.dev/strategic-ivy-478509-u6/sevenhunter-repo/sevenhunter-engine:latest'
 options:
   logging: CLOUD_LOGGING_ONLY
