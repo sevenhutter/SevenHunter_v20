@@ -32,3 +32,5 @@ steps:
 
 images:
   - 'asia-northeast3-docker.pkg.dev/strategic-ivy-478509-u6/sevenhunter-repo/sevenhunter-engine:latest'
+options:
+  logging: CLOUD_LOGGING_ONLY
